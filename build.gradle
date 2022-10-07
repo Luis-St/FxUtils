@@ -1,0 +1,57 @@
+plugins {
+	id "java-library"
+	id "eclipse"
+	id "java"
+	id "org.openjfx.javafxplugin" version "0.0.10"
+}
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+}
+
+eclipse {
+	jdt {
+		sourceCompatibility = "17"
+		targetCompatibility = "17"
+	}
+}
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+javafx {
+	version = "17"
+	modules = [ "javafx.controls" ]
+}
+
+compileJava {
+	sourceCompatibility = "17"
+	targetCompatibility = "17"
+}
+
+println("Java: " + System.getProperty("java.version") + " JVM: " + System.getProperty("java.vm.version") + "Java Runtime:" + System.getProperty("java.runtime.version"))
+
+dependencies {
+	// Local
+	implementation "org.controlsfx:ControlsFX:1.0" // FX
+	implementation "net.luis:Lutils:1.0" // Utility
+	// Google
+	implementation "com.google.guava:guava:31.0.1-jre" // Utility
+}
+
+wrapper {
+    gradleVersion = "7.3"
+    distributionType = Wrapper.DistributionType.ALL
+}
+
+jar {
+	manifest {
+		attributes([
+			"Built-By": "Luis Staudt"
+		])
+	}
+}
