@@ -3,6 +3,7 @@ plugins {
 	id "eclipse"
 	id "java"
 	id "org.openjfx.javafxplugin" version "0.0.10"
+	id "maven-publish"
 }
 
 repositories {
@@ -38,9 +39,8 @@ println("Java: " + System.getProperty("java.version") + " JVM: " + System.getPro
 dependencies {
 	// Local
 	implementation "org.controlsfx:ControlsFX:1.0" // FX
-	implementation "net.luis:Lutils:1.0" // Utility
-	// Google
-	implementation "com.google.guava:guava:31.0.1-jre" // Utility
+	// Other
+	implementation "org.jetbrains:annotations:23.0.0" // Annotations
 }
 
 wrapper {
@@ -48,10 +48,32 @@ wrapper {
     distributionType = Wrapper.DistributionType.ALL
 }
 
+java {
+	withSourcesJar()
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			groupId = "net.fxutils"
+			artifactId = "FxUtils"
+			version = "1.0"
+			artifact jar
+		}
+	}
+	
+	repositories {
+		maven {
+			url "file://C:/Users/luiss/.m2/repository"
+		}
+	}
+}
+
 jar {
 	manifest {
 		attributes([
-			"Built-By": "Luis Staudt"
+			"Built-By": "Luis Staudt",
+			"Multi-Release": "true"
 		])
 	}
 }
