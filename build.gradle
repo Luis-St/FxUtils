@@ -55,9 +55,9 @@ java {
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
-			groupId = "net.fxutils"
+			groupId = "net.luis.fxutils"
 			artifactId = "FxUtils"
-			version = "1.0"
+			version = "1.1"
 			artifact jar
 		}
 	}
