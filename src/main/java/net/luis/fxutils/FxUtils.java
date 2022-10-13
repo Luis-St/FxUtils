@@ -32,13 +32,6 @@ import javafx.stage.Popup;
 
 public class FxUtils {
 	
-	/**
-	 * TODO:
-	 *  - Add property key for Pos
-	 *  - Add property key for padding array
-	 *  - Add property key for hGap and vGap
-	 */
-	
 	private static final String GRID_POS_KEY = "fxutils.grid.default.pos";
 	
 	private static final String GRID_PADDING_KEY = "fxutils.grid.default.padding";
