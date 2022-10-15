@@ -298,7 +298,8 @@ public class FxUtils {
 	@NotNull
 	public static Parent addHighlighting(Node node, Background highlightBackground, Background defaultBackground, Insets highlightPadding) {
 		GridPane pane = makeGrid(Pos.CENTER, highlightPadding, 0.0, 0.0);
-		pane.add(pane, 0, 0);
+		pane.add(node, 0, 0);
+		pane.setBackground(defaultBackground);
 		pane.hoverProperty().addListener(PropertyListeners.create((oldValue, newValue) -> {
 			if (newValue) {
 				pane.setBackground(highlightBackground);
