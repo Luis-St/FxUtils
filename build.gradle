@@ -11,21 +11,12 @@ version = "1.4"
 
 repositories {
 	mavenCentral()
-	mavenLocal()
-}
-
-eclipse {
-	jdt {
-		sourceCompatibility = "17"
-		targetCompatibility = "17"
+	maven {
+		url uri("${projectDir}/maven/repositories")
 	}
 }
 
-java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
-	}
-}
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 javafx {
 	version = "17"
@@ -41,7 +32,7 @@ println("Java: " + System.getProperty("java.version") + " JVM: " + System.getPro
 
 dependencies {
 	// Local
-	implementation "org.controlsfx:ControlsFX:1.0" // FX
+	implementation "org.controlsfx:ControlsFX:1.1" // FX
 	// Other
 	implementation "org.jetbrains:annotations:23.0.0" // Annotations
 }
@@ -72,7 +63,10 @@ publishing {
 	
 	repositories {
 		maven {
-			url "file://C:/Users/luiss/.m2/repository"
+			url uri("C:/Users/luiss/.m2/repository")
+		}
+		maven {
+			url uri("${projectDir}/maven/repositories")
 		}
 	}
 }
