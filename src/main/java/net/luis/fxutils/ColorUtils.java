@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 public class ColorUtils {
 	
 	public static Color createColor(String hex) {
+		hex = hex.trim();
 		if (hex.startsWith("#")) {
 			hex = hex.replace("#", "");
 		}
