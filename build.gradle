@@ -6,9 +6,6 @@ plugins {
 	id "maven-publish"
 }
 
-archivesBaseName = "FxUtils"
-version = "1.4"
-
 repositories {
 	mavenCentral()
 	maven {
@@ -53,9 +50,9 @@ artifacts {
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
-			groupId = "net.luis.fxutils"
+			groupId = "net.luis"
 			artifactId = "FxUtils"
-			version = "1.7"
+			version = "1.8"
 			artifact jar
 			artifact sourcesJar
 		}
