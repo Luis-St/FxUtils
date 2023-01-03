@@ -28,28 +28,23 @@ import javafx.stage.Popup;
 
 public class FxUtils {
 	
-	@NotNull
-	public static GridPane makeDefaultGrid() {
+	public static @NotNull GridPane makeDefaultGrid() {
 		return makeGrid(Pos.CENTER, 20.0, 10.0);
 	}
 	
-	@NotNull
-	public static GridPane makeGrid(double padding, double gap) {
+	public static @NotNull GridPane makeGrid(double padding, double gap) {
 		return makeGrid(Pos.CENTER, padding, gap);
 	}
 	
-	@NotNull
-	public static GridPane makeGrid(Pos pos, double padding, double gap) {
+	public static @NotNull GridPane makeGrid(Pos pos, double padding, double gap) {
 		return makeGrid(pos, padding, gap, gap);
 	}
 	
-	@NotNull
-	public static GridPane makeGrid(Pos pos, double padding, double hGap, double vGap) {
+	public static @NotNull GridPane makeGrid(Pos pos, double padding, double hGap, double vGap) {
 		return makeGrid(pos, new Insets(padding), hGap, vGap);
 	}
 	
-	@NotNull
-	public static GridPane makeGrid(Pos pos, Insets padding, double hGap, double vGap) {
+	public static @NotNull GridPane makeGrid(Pos pos, Insets padding, double hGap, double vGap) {
 		GridPane pane = new GridPane();
 		pane.setAlignment(pos);
 		pane.setHgap(hGap);
@@ -58,23 +53,19 @@ public class FxUtils {
 		return pane;
 	}
 	
-	@NotNull
-	public static VBox makeDefaultVBox(Node... children) {
+	public static @NotNull VBox makeDefaultVBox(Node... children) {
 		return makeVBox(Pos.CENTER, 0.0, children);
 	}
 	
-	@NotNull
-	public static VBox makeVBox(double padding, Node... children) {
+	public static @NotNull VBox makeVBox(double padding, Node... children) {
 		return makeVBox(Pos.CENTER, padding, children);
 	}
 	
-	@NotNull
-	public static VBox makeVBox(Pos pos, double padding, Node... children) {
+	public static @NotNull VBox makeVBox(Pos pos, double padding, Node... children) {
 		return makeVBox(pos, new Insets(padding), children);
 	}
 	
-	@NotNull
-	public static VBox makeVBox(Pos pos, Insets padding, Node... children) {
+	public static @NotNull VBox makeVBox(Pos pos, Insets padding, Node... children) {
 		VBox box = new VBox();
 		box.setAlignment(pos);
 		box.setPadding(padding);
@@ -82,23 +73,19 @@ public class FxUtils {
 		return box;
 	}
 	
-	@NotNull
-	public static HBox makeDefaultHBox(Node... children) {
+	public static @NotNull HBox makeDefaultHBox(Node... children) {
 		return makeHBox(Pos.CENTER, 0.0, children);
 	}
 	
-	@NotNull
-	public static HBox makeHBox(double padding, Node... children) {
+	public static @NotNull HBox makeHBox(double padding, Node... children) {
 		return makeHBox(Pos.CENTER, padding, children);
 	}
 	
-	@NotNull
-	public static HBox makeHBox(Pos pos, double padding, Node... children) {
+	public static @NotNull HBox makeHBox(Pos pos, double padding, Node... children) {
 		return makeHBox(pos, new Insets(padding), children);
 	}
 	
-	@NotNull
-	public static HBox makeHBox(Pos pos, Insets padding, Node... children) {
+	public static @NotNull HBox makeHBox(Pos pos, Insets padding, Node... children) {
 		HBox box = new HBox();
 		box.setAlignment(pos);
 		box.setPadding(padding);
@@ -106,68 +93,50 @@ public class FxUtils {
 		return box;
 	}
 	
-	@NotNull
-	public static Button makeButton(Runnable action) {
+	public static @NotNull Button makeButton(Runnable action) {
 		Button button = new Button();
-		button.setOnAction((event) -> {
-			action.run();
-		});
+		button.setOnAction((event) -> action.run());
 		return button;
 	}
 	
-	@NotNull
-	public static Button makeButton(String name, Runnable action) {
+	public static @NotNull Button makeButton(String name, Runnable action) {
 		Button button = new Button(name);
-		button.setOnAction((event) -> {
-			action.run();
-		});
+		button.setOnAction((event) -> action.run());
 		return button;
 	}
 	
-	@NotNull
-	public static ImageView makeImageView(Path imagePath, double width, double heigh) {
-		return makeImageView(imagePath.toString(), width, heigh);
+	public static @NotNull ImageView makeImageView(Path imagePath, double width, double height) {
+		return makeImageView(imagePath.toString(), width, height);
 	}
 	
-	@NotNull
-	public static ImageView makeImageView(String imagePath, double width, double heigh) {
-		return makeImageView(imagePath, width, heigh, true);
+	public static @NotNull ImageView makeImageView(String imagePath, double width, double height) {
+		return makeImageView(imagePath, width, height, true);
 	}
 	
-	@NotNull
-	public static ImageView makeImageView(Path imagePath, double width, double heigh, boolean smooth) {
-		return makeImageView(imagePath.toString(), width, heigh, smooth);
+	public static @NotNull ImageView makeImageView(Path imagePath, double width, double height, boolean smooth) {
+		return makeImageView(imagePath.toString(), width, height, smooth);
 	}
 	
-	@NotNull
-	public static ImageView makeImageView(String imagePath, double width, double heigh, boolean smooth) {
+	public static @NotNull ImageView makeImageView(String imagePath, double width, double height, boolean smooth) {
 		if (imagePath.contains(".")) {
-			return makeImageView(new Image(imagePath), width, heigh, smooth);
+			return makeImageView(new Image(imagePath), width, height, smooth);
 		}
-		return makeImageView(new Image(imagePath + ".png"), width, heigh, smooth);
+		return makeImageView(new Image(imagePath + ".png"), width, height, smooth);
 	}
 	
-	@NotNull
-	public static ImageView makeImageView(Image image, double width, double heigh, boolean smooth) {
+	public static @NotNull ImageView makeImageView(Image image, double width, double height, boolean smooth) {
 		ImageView imageView = new ImageView(image);
 		imageView.setFitWidth(width);
-		imageView.setFitHeight(heigh);
+		imageView.setFitHeight(height);
 		imageView.setSmooth(smooth);
 		return imageView;
 	}
 	
-	@NotNull
-	public static Popup makeDefaultPopup(double width, double height, Node... nodes) {
+	public static @NotNull Popup makePopup(double width, double height, Node... nodes) {
 		return makePopup(true, width, height, "-fx-background-color: #F4F4F4; -fx-padding: 0; -fx-border-color: black; -fx-border-width: 1;", nodes);
 	}
 	
-	@NotNull
-	public static Popup makePopup(double width, double height, Node... nodes) {
-		return makePopup(true, width, height, "-fx-background-color: #F4F4F4; -fx-padding: 0; -fx-border-color: black; -fx-border-width: 1;", nodes);
-	}
-	
-	@NotNull
-	public static Popup makePopup(boolean hideOnEscape, double width, double height, String style, Node... nodes) {
+	public static @NotNull Popup makePopup(boolean hideOnEscape, double width, double height, String style, Node... nodes) {
 		Popup popup = new Popup();
 		popup.setHideOnEscape(hideOnEscape);
 		Label backgroundLabel = new Label();

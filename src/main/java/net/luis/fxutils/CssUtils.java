@@ -1,7 +1,11 @@
 package net.luis.fxutils;
 
+import javafx.css.PseudoClass;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 /**
  *
@@ -11,22 +15,31 @@ import javafx.scene.Parent;
 
 public class CssUtils {
 	
-	public static void addStyle(Node node, String style) {
+	public static <T extends  Node> @NotNull T addStyle(T node, String style) {
 		node.setStyle(style);
+		return node;
 	}
 	
 	// id use '#' as indicator
-	public static void setId(Node node, String id) {
+	public static <T extends  Node> @NotNull T setId(T node, String id) {
 		node.setId(id);
+		return node;
 	}
 	
 	// class use '.' as indicator
-	public static void addStyleClass(Node node, String styleClass) {
+	public static <T extends  Node> @NotNull T addStyleClass(T node, String styleClass) {
 		node.getStyleClass().add(styleClass);
+		return node;
 	}
 	
-	public static void addStylesheet(Parent parent, String stylesheet) {
+	public static <T extends Parent> @NotNull T addStylesheet(T parent, String stylesheet) {
 		parent.getStylesheets().add(stylesheet);
+		return parent;
+	}
+	
+	public static <T extends  Node> @NotNull T setPseudoClassValue(T node, String clazz, boolean value) {
+		node.pseudoClassStateChanged(PseudoClass.getPseudoClass(clazz), value);
+		return node;
 	}
 	
 }
