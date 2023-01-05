@@ -5,8 +5,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-
 /**
  *
  * @author Luis-st
@@ -15,19 +13,19 @@ import java.util.Objects;
 
 public class CssUtils {
 	
-	public static <T extends  Node> @NotNull T addStyle(T node, String style) {
+	public static <T extends Node> @NotNull T addStyle(T node, String style) {
 		node.setStyle(style);
 		return node;
 	}
 	
 	// id use '#' as indicator
-	public static <T extends  Node> @NotNull T setId(T node, String id) {
+	public static <T extends Node> @NotNull T setId(T node, String id) {
 		node.setId(id);
 		return node;
 	}
 	
 	// class use '.' as indicator
-	public static <T extends  Node> @NotNull T addStyleClass(T node, String styleClass) {
+	public static <T extends Node> @NotNull T addStyleClass(T node, String styleClass) {
 		node.getStyleClass().add(styleClass);
 		return node;
 	}
@@ -37,7 +35,7 @@ public class CssUtils {
 		return parent;
 	}
 	
-	public static <T extends  Node> @NotNull T setPseudoClassValue(T node, String clazz, boolean value) {
+	public static <T extends Node> @NotNull T setPseudoClassValue(T node, String clazz, boolean value) {
 		node.pseudoClassStateChanged(PseudoClass.getPseudoClass(clazz), value);
 		return node;
 	}
