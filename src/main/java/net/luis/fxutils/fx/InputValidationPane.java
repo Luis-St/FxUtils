@@ -31,6 +31,7 @@ public class InputValidationPane<T extends Node> extends InputPane<T> {
 	
 	@Override
 	protected void update() {
+		super.update();
 		this.getInputNode().setOnKeyTyped(EventHandlers.create(this.inputValidation));
 		this.getInputNode().setOnMouseClicked(EventHandlers.create(this.inputValidation));
 	}
