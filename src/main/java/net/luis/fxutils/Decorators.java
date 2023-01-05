@@ -1,13 +1,11 @@
 package net.luis.fxutils;
 
-import org.controlsfx.control.decoration.Decorator;
-import org.controlsfx.control.decoration.GraphicDecoration;
-import org.jetbrains.annotations.NotNull;
-
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.controlsfx.control.decoration.Decorator;
+import org.controlsfx.control.decoration.GraphicDecoration;
 
 import java.util.Objects;
 

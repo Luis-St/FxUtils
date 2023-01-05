@@ -1,9 +1,8 @@
 package net.luis.fxutils;
 
-import org.jetbrains.annotations.NotNull;
-
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import org.jetbrains.annotations.NotNull;
 
 /**
  *
