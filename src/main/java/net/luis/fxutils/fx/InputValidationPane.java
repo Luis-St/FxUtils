@@ -61,6 +61,17 @@ public class InputValidationPane<T extends Node> extends InputPane<T> {
 		this.inputValidation.run();
 	}
 	
+	public void overrideInputValidation(InputValidationPane.ValidationState state) {
+		Objects.requireNonNull(state);
+		this.setPseudoClassValue("valid", false);
+		this.setPseudoClassValue("invalid", false);
+		if (state == ValidationState.VALID) {
+			this.setPseudoClassValue("valid", true);
+		} else if (state == ValidationState.INVALID) {
+			this.setPseudoClassValue("invalid", true);
+		}
+	}
+	
 	public void addChildNode(Node node) {
 		this.childNodes.add(node);
 		this.update();
