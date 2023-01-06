@@ -17,10 +17,10 @@ import java.util.Objects;
 
 public class Decorators {
 	
-	public static final ImageView INFO_DECORATION = new ImageView(new Image(Objects.requireNonNull(Decorators.class.getResource("/impl/org/controlsfx/control/validation/decoration-info.png")).toExternalForm()));
-	public static final ImageView WARNING_DECORATION = new ImageView(new Image(Objects.requireNonNull(Decorators.class.getResource("/impl/org/controlsfx/control/validation/decoration-warning.png")).toExternalForm()));
-	public static final ImageView ERROR_DECORATION = new ImageView(new Image(Objects.requireNonNull(Decorators.class.getResource("/impl/org/controlsfx/control/validation/decoration-error.png")).toExternalForm()));
-	public static final ImageView REQUIRED_DECORATION = new ImageView(new Image(Objects.requireNonNull(Decorators.class.getResource("/impl/org/controlsfx/control/validation/required-indicator.png")).toExternalForm()));
+	public static final ImageView INFO_DECORATION = new ImageView(new Image(Objects.requireNonNull(Decorators.class.getResourceAsStream("/impl/org/controlsfx/control/validation/decoration-info.png"))));
+	public static final ImageView WARNING_DECORATION = new ImageView(new Image(Objects.requireNonNull(Decorators.class.getResourceAsStream("/impl/org/controlsfx/control/validation/decoration-warning.png"))));
+	public static final ImageView ERROR_DECORATION = new ImageView(new Image(Objects.requireNonNull(Decorators.class.getResourceAsStream("/impl/org/controlsfx/control/validation/decoration-error.png"))));
+	public static final ImageView REQUIRED_DECORATION = new ImageView(new Image(Objects.requireNonNull(Decorators.class.getResourceAsStream("/impl/org/controlsfx/control/validation/required-indicator.png"))));
 	
 	public static void addInfoDecoration(Node node, Pos pos) {
 		Decorator.addDecoration(node, new GraphicDecoration(INFO_DECORATION, pos));

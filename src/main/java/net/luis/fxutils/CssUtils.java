@@ -40,4 +40,10 @@ public class CssUtils {
 		return node;
 	}
 	
+	public static void setPseudoClassValues(String clazz, boolean value, Node... nodes) {
+		for (Node node : nodes) {
+			setPseudoClassValue(node, clazz, value);
+		}
+	}
+	
 }
