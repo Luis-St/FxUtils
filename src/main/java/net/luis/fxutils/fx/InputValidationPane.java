@@ -1,6 +1,7 @@
 package net.luis.fxutils.fx;
 
 import javafx.scene.Node;
+import javafx.scene.control.TextInputControl;
 import net.luis.fxutils.CssUtils;
 import net.luis.fxutils.EventHandlers;
 
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  *
@@ -19,6 +21,13 @@ public class InputValidationPane<T extends Node> extends InputPane<T> {
 	
 	private final List<Node> childNodes = new ArrayList<>();
 	private Runnable inputValidation;
+	private Predicate<T> validationPredicate = (node) -> {
+		if (this.getInputNode() instanceof TextInputControl control) {
+			return control.isEditable();
+		} else {
+			return true;
+		}
+	};
 	
 	public InputValidationPane(String inputText, T inputNode) {
 		super(inputText, inputNode);
@@ -38,13 +47,15 @@ public class InputValidationPane<T extends Node> extends InputPane<T> {
 	
 	public void setInputValidation(Function<T, InputValidationPane.ValidationState> inputValidation) {
 		this.inputValidation = () -> {
-			this.setPseudoClassValue("valid", false);
-			this.setPseudoClassValue("invalid", false);
-			ValidationState state = Objects.requireNonNull(inputValidation).apply(this.getInputNode());
-			if (state == ValidationState.VALID) {
-				this.setPseudoClassValue("valid", true);
-			} else if (state == ValidationState.INVALID) {
-				this.setPseudoClassValue("invalid", true);
+			if (this.isValidationActive()) {
+				this.setPseudoClassValue("valid", false);
+				this.setPseudoClassValue("invalid", false);
+				ValidationState state = Objects.requireNonNull(inputValidation).apply(this.getInputNode());
+				if (state == ValidationState.VALID) {
+					this.setPseudoClassValue("valid", true);
+				} else if (state == ValidationState.INVALID) {
+					this.setPseudoClassValue("invalid", true);
+				}
 			}
 		};
 		this.update();
@@ -59,6 +70,14 @@ public class InputValidationPane<T extends Node> extends InputPane<T> {
 	
 	public void validateInput() {
 		this.inputValidation.run();
+	}
+	
+	public void setValidationPredicate(Predicate<T> validationPredicate) {
+		this.validationPredicate = validationPredicate;
+	}
+	
+	public boolean isValidationActive() {
+		return this.validationPredicate.test(this.getInputNode());
 	}
 	
 	public void overrideInputValidation(InputValidationPane.ValidationState state) {
