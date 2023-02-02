@@ -20,7 +20,7 @@ import java.util.function.Predicate;
 public class InputValidationPane<T extends Node> extends InputPane<T> {
 	
 	private final List<Node> childNodes = new ArrayList<>();
-	private Runnable inputValidation;
+	private Runnable inputValidation = () -> {};
 	private Predicate<T> validationPredicate = (node) -> {
 		if (this.getInputNode() instanceof TextInputControl control) {
 			return control.isEditable();

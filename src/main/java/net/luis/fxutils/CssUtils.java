@@ -3,6 +3,7 @@ package net.luis.fxutils;
 import javafx.css.PseudoClass;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -33,6 +34,11 @@ public class CssUtils {
 	public static <T extends Parent> @NotNull T addStylesheet(T parent, String stylesheet) {
 		parent.getStylesheets().add(stylesheet);
 		return parent;
+	}
+	
+	public static <T extends Stage> @NotNull T addStylesheet(T stage, String stylesheet) {
+		stage.getScene().getStylesheets().add(stylesheet);
+		return stage;
 	}
 	
 	public static <T extends Node> @NotNull T setPseudoClassValue(T node, String clazz, boolean value) {
