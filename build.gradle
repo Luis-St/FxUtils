@@ -29,9 +29,9 @@ println("Java: " + System.getProperty("java.version") + " JVM: " + System.getPro
 
 dependencies {
 	// Local
-	implementation "org.controlsfx:ControlsFX:1.1" // FX
+	implementation "org.controlsfx:ControlsFX:${ControlsFX}" // FX
 	// Other
-	implementation "org.jetbrains:annotations:23.0.0" // Annotations
+	implementation "org.jetbrains:annotations:${JetBrainsAnnotations}" // Annotations
 }
 
 wrapper {
