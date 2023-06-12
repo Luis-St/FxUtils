@@ -147,5 +147,4 @@ public class FxUtils {
 		popup.getContent().add(new StackPane(children.toArray(Node[]::new)));
 		return popup;
 	}
-	
 }

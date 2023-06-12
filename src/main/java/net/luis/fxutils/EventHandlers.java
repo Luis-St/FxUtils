@@ -15,5 +15,4 @@ public class EventHandlers {
 	public static <T extends Event> @NotNull EventHandler<T> create(Runnable eventAction) {
 		return event -> eventAction.run();
 	}
-	
 }

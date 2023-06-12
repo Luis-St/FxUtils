@@ -19,13 +19,11 @@ public class CssUtils {
 		return node;
 	}
 	
-	// id use '#' as indicator
 	public static <T extends Node> @NotNull T setId(T node, String id) {
 		node.setId(id);
 		return node;
 	}
 	
-	// class use '.' as indicator
 	public static <T extends Node> @NotNull T addStyleClass(T node, String styleClass) {
 		node.getStyleClass().add(styleClass);
 		return node;
@@ -51,5 +49,4 @@ public class CssUtils {
 			setPseudoClassValue(node, clazz, value);
 		}
 	}
-	
 }

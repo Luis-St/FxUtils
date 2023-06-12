@@ -56,5 +56,4 @@ public class InputPane<T extends Node> extends GridPane {
 	public @NotNull T getInputNode() {
 		return this.inputNode;
 	}
-	
 }

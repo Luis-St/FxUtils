@@ -107,7 +107,5 @@ public class InputValidationPane<T extends Node> extends InputPane<T> {
 	public enum ValidationState {
 		
 		VALID(), INVALID(), DEFAULT()
-		
 	}
-	
 }
