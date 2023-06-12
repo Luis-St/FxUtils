@@ -1,6 +1,9 @@
 package net.luis.fxutils;
 
+import static net.luis.fxutils.internal.SystemPropertyHelper.getBooleanProperty;
 import static net.luis.fxutils.internal.SystemPropertyHelper.getDoubleProperty;
+import static net.luis.fxutils.internal.SystemPropertyHelper.getEnumProperty;
+import static net.luis.fxutils.internal.SystemPropertyHelper.hasProperties;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,14 +39,45 @@ public class FxUtils {
 	 *  - Add property key for hGap and vGap
 	 */
 	
+	private static final String GRID_POS_KEY = "fxutils.grid.default.pos";
+	
 	private static final String GRID_PADDING_KEY = "fxutils.grid.default.padding";
+	private static final String GRID_PADDING_TOP_KEY = "fxutils.grid.default.padding_top";
+	private static final String GRID_PADDING_RIGHT_KEY = "fxutils.grid.default.padding_right";
+	private static final String GRID_PADDING_BOTTOM_KEY = "fxutils.grid.default.padding_bottom";
+	private static final String GRID_PADDING_LEFT_KEY = "fxutils.grid.default.padding_left";
 	private static final String GRID_GAP_KEY = "fxutils.grid.default.gap";
+	private static final String GRID_HGAP_KEY = "fxutils.grid.default.hgap";
+	private static final String GRID_VGAP_KEY = "fxutils.grid.default.vgap";
+	
+	private static final String VBOX_POS_KEY = "fxutils.vbox.default.pos";
 	private static final String VBOX_PADDING_KEY = "fxutils.vbox.default.padding";
+	private static final String VBOX_PADDING_TOP_KEY = "fxutils.vbox.default.padding_top";
+	private static final String VBOX_PADDING_RIGHT_KEY = "fxutils.vbox.default.padding_right";
+	private static final String VBOX_PADDING_BOTTOM_KEY = "fxutils.vbox.default.padding_bottom";
+	private static final String VBOX_PADDING_LEFT_KEY = "fxutils.vbox.default.padding_left";
+
+	private static final String HBOX_POS_KEY = "fxutils.hbox.default.pos";
 	private static final String HBOX_PADDING_KEY = "fxutils.hbox.default.padding";
+	private static final String HBOX_PADDING_TOP_KEY = "fxutils.hbox.default.padding_top";
+	private static final String HBOX_PADDING_RIGHT_KEY = "fxutils.hbox.default.padding_right";
+	private static final String HBOX_PADDING_BOTTOM_KEY = "fxutils.hbox.default.padding_bottom";
+	private static final String HBOX_PADDING_LEFT_KEY = "fxutils.hbox.default.padding_left";
+	
+	private static final String POPUP_HIDE_ON_ESCAPE_KEY = "fxutils.popup.default.hide_on_escape";
 	
 	@NotNull
 	public static GridPane makeDefaultGrid() {
-		return makeGrid(getDoubleProperty(GRID_PADDING_KEY, 20.0), getDoubleProperty(GRID_GAP_KEY, 10.0));
+		if (hasProperties(GRID_PADDING_TOP_KEY, GRID_PADDING_RIGHT_KEY, GRID_PADDING_BOTTOM_KEY, GRID_PADDING_LEFT_KEY) && hasProperties(GRID_HGAP_KEY, GRID_VGAP_KEY)) {
+			Insets padding = new Insets(getDoubleProperty(GRID_PADDING_TOP_KEY, 20.0), getDoubleProperty(GRID_PADDING_RIGHT_KEY, 20.0), getDoubleProperty(GRID_PADDING_BOTTOM_KEY, 20.0), getDoubleProperty(GRID_PADDING_LEFT_KEY, 20.0));
+			return makeGrid(getEnumProperty(GRID_POS_KEY, Pos.values(), Pos.CENTER), padding, getDoubleProperty(GRID_HGAP_KEY, 10.0), getDoubleProperty(GRID_VGAP_KEY, 10.0));
+		} else if (hasProperties(GRID_PADDING_TOP_KEY, GRID_PADDING_RIGHT_KEY, GRID_PADDING_BOTTOM_KEY, GRID_PADDING_LEFT_KEY)) {
+			Insets padding = new Insets(getDoubleProperty(GRID_PADDING_TOP_KEY, 20.0), getDoubleProperty(GRID_PADDING_RIGHT_KEY, 20.0), getDoubleProperty(GRID_PADDING_BOTTOM_KEY, 20.0), getDoubleProperty(GRID_PADDING_LEFT_KEY, 20.0));
+			return makeGrid(getEnumProperty(GRID_POS_KEY, Pos.values(), Pos.CENTER), padding, getDoubleProperty(GRID_GAP_KEY, 10.0), getDoubleProperty(GRID_GAP_KEY, 10.0));
+		} else if (hasProperties(GRID_HGAP_KEY, GRID_VGAP_KEY)) {
+			return makeGrid(getEnumProperty(GRID_POS_KEY, Pos.values(), Pos.CENTER), getDoubleProperty(GRID_PADDING_KEY, 20.0), getDoubleProperty(GRID_HGAP_KEY, 10.0), getDoubleProperty(GRID_VGAP_KEY, 10.0));
+		}
+		return makeGrid(getEnumProperty(GRID_POS_KEY, Pos.values(), Pos.CENTER), getDoubleProperty(GRID_PADDING_KEY, 20.0), getDoubleProperty(GRID_GAP_KEY, 10.0));
 	}
 	
 	@NotNull
@@ -88,7 +122,11 @@ public class FxUtils {
 	
 	@NotNull
 	public static VBox makeDefaultVBox(Node... children) {
-		return makeVBox(getDoubleProperty(VBOX_PADDING_KEY, 0.0), children);
+		if (hasProperties(VBOX_PADDING_TOP_KEY, VBOX_PADDING_RIGHT_KEY, VBOX_PADDING_BOTTOM_KEY, VBOX_PADDING_LEFT_KEY)) {
+			Insets padding = new Insets(getDoubleProperty(VBOX_PADDING_TOP_KEY, 0.0), getDoubleProperty(VBOX_PADDING_RIGHT_KEY, 0.0), getDoubleProperty(VBOX_PADDING_BOTTOM_KEY, 0.0), getDoubleProperty(VBOX_PADDING_LEFT_KEY, 0.0));
+			return makeVBox(getEnumProperty(VBOX_POS_KEY, Pos.values(), Pos.CENTER), padding, children);
+		}
+		return makeVBox(getEnumProperty(VBOX_POS_KEY, Pos.values(), Pos.CENTER), getDoubleProperty(VBOX_PADDING_KEY, 0.0), children);
 	}
 	
 	@NotNull
@@ -127,7 +165,11 @@ public class FxUtils {
 	
 	@NotNull
 	public static HBox makeDefaultHBox(Node... children) {
-		return makeHBox(getDoubleProperty(HBOX_PADDING_KEY, 0.0), children);
+		if (hasProperties(HBOX_PADDING_TOP_KEY, HBOX_PADDING_RIGHT_KEY, HBOX_PADDING_BOTTOM_KEY, HBOX_PADDING_LEFT_KEY)) {
+			Insets padding = new Insets(getDoubleProperty(HBOX_PADDING_TOP_KEY, 0.0), getDoubleProperty(HBOX_PADDING_RIGHT_KEY, 0.0), getDoubleProperty(HBOX_PADDING_BOTTOM_KEY, 0.0), getDoubleProperty(HBOX_PADDING_LEFT_KEY, 0.0));
+			return makeHBox(getEnumProperty(HBOX_POS_KEY, Pos.values(), Pos.CENTER), padding, children);
+		}
+		return makeHBox(getEnumProperty(HBOX_POS_KEY, Pos.values(), Pos.CENTER), getDoubleProperty(HBOX_PADDING_KEY, 0.0), children);
 	}
 	
 	@NotNull
@@ -197,18 +239,27 @@ public class FxUtils {
 	}
 	
 	@NotNull
+	public static Popup makeDefaultPopup(double width, double height, Node... nodes) {
+		return makePopup(getBooleanProperty(POPUP_HIDE_ON_ESCAPE_KEY, true), width, height, "-fx-background-color: #F4F4F4; -fx-padding: 0; -fx-border-color: black; -fx-border-width: 1;", nodes);
+	}
+	
+	@NotNull
+	public static Popup makePopup(double width, double height, Node... nodes) {
+		return makePopup(true, width, height, "-fx-background-color: #F4F4F4; -fx-padding: 0; -fx-border-color: black; -fx-border-width: 1;", nodes);
+	}
+	
+	@NotNull
 	public static Popup makePopup(boolean hideOnEscape, double width, double height, String style, Node... nodes) {
 		Popup popup = new Popup();
 		popup.setHideOnEscape(hideOnEscape);
 		Label backgroundLabel = new Label();
-		backgroundLabel.setStyle("-fx-background-color: #F4F4F4; -fx-padding: 0; -fx-border-color: black; -fx-border-width: 1;");
+		backgroundLabel.setStyle(style);
 		backgroundLabel.setPrefSize(width, height);
 		List<Node> children = new ArrayList<>();
 		children.add(backgroundLabel);
 		children.addAll(Arrays.asList(nodes));
 		popup.getContent().add(new StackPane(children.toArray(Node[]::new)));
 		return popup;
-		
 	}
 	
 }
