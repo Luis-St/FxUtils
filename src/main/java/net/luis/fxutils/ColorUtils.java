@@ -1,6 +1,7 @@
 package net.luis.fxutils;
 
 import javafx.scene.paint.Color;
+import org.jetbrains.annotations.NotNull;
 
 /**
  *
@@ -10,7 +11,7 @@ import javafx.scene.paint.Color;
 
 public class ColorUtils {
 	
-	public static Color createColor(String hex) {
+	public static @NotNull Color createColor(String hex) {
 		hex = hex.trim();
 		if (hex.startsWith("#")) {
 			hex = hex.replace("#", "");
@@ -25,11 +26,11 @@ public class ColorUtils {
 		return createColor(r, g, b);
 	}
 	
-	public static Color createColor(int r, int g, int b) {
+	public static @NotNull Color createColor(int r, int g, int b) {
 		return createColor(r, g, b, 255);
 	}
 	
-	public static Color createColor(int r, int g, int b, int a) {
+	public static @NotNull Color createColor(int r, int g, int b, int a) {
 		return new Color(r / 255.0, g / 255.0, b / 255.0, a / 255.0);
 	}
 	
