@@ -4,9 +4,6 @@ plugins {
 	id "maven-publish"
 }
 
-archivesBaseName = "FxUtils"
-version = "1.4"
-
 repositories {
 	mavenCentral()
 	maven {
