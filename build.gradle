@@ -1,51 +1,55 @@
 plugins {
-	id "java-library"
-	id "eclipse"
 	id "java"
 	id "org.openjfx.javafxplugin" version "0.0.10"
+	id "maven-publish"
 }
 
 repositories {
 	mavenCentral()
-	mavenLocal()
-}
-
-eclipse {
-	jdt {
-		sourceCompatibility = "17"
-		targetCompatibility = "17"
-	}
-}
-
-java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
+	maven {
+		url uri("${projectDir}/maven/repositories")
 	}
 }
 
 javafx {
-	version = "17"
+	version = "17.0.6"
 	modules = [ "javafx.controls" ]
 }
 
-compileJava {
-	sourceCompatibility = "17"
-	targetCompatibility = "17"
-}
-
-println("Java: " + System.getProperty("java.version") + " JVM: " + System.getProperty("java.vm.version") + "Java Runtime:" + System.getProperty("java.runtime.version"))
-
 dependencies {
 	// Local
-	implementation "org.controlsfx:ControlsFX:1.0" // FX
-	implementation "net.luis:Lutils:1.0" // Utility
+	implementation "org.controlsfx:ControlsFx:${ControlsFx}" // FX
+	implementation "net.luis:LUtils:${LUtils}" // Utility
 	// Google
-	implementation "com.google.guava:guava:31.0.1-jre" // Utility
+	implementation "com.google.guava:guava:${GoogleGuava}" // Utility
+	// Other
+	implementation "org.jetbrains:annotations:${JetBrainsAnnotations}" // Annotations
 }
 
-wrapper {
-    gradleVersion = "7.3"
-    distributionType = Wrapper.DistributionType.ALL
+
+java {
+	withSourcesJar()
+}
+
+artifacts {
+	archives sourcesJar
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			groupId = "net.luis"
+			artifactId = "FxUtils"
+			version = "1.0.0"
+			artifact jar
+			artifact sourcesJar
+		}
+	}
+	repositories {
+		maven {
+			url uri("${projectDir}/maven/repositories")
+		}
+	}
 }
 
 jar {

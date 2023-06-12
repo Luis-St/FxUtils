@@ -1,16 +1,7 @@
-# eclipse
-bin
-.settings
-.classpath
-.project
-
 # gradle
-build
-.gradle
-
-# other
-eclipse
-run
+/build/
+/.gradle/
 
 # project files
-setup.bat
+/.idea/
+src/main/java/net/luis/utils/Main.java
