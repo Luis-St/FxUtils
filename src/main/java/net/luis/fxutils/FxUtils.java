@@ -230,8 +230,18 @@ public class FxUtils {
 	}
 	
 	@NotNull
-	public static ImageView makeImageView(String path, double width, double heigh, boolean smooth) {
-		ImageView imageView = new ImageView(new Image(path));
+	public static ImageView makeImageView(Image image, double width, double heigh) {
+		return makeImageView(image, width, heigh, true);
+	}
+	
+	@NotNull
+	public static ImageView makeImageView(String imagePath, double width, double heigh, boolean smooth) {
+		return makeImageView(new Image(imagePath), width, heigh, smooth);
+	}
+	
+	@NotNull
+	public static ImageView makeImageView(Image image, double width, double heigh, boolean smooth) {
+		ImageView imageView = new ImageView(image);
 		imageView.setFitWidth(width);
 		imageView.setFitHeight(heigh);
 		imageView.setSmooth(smooth);
