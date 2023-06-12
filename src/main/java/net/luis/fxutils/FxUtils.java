@@ -14,14 +14,19 @@ import org.jetbrains.annotations.NotNull;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Popup;
 
 /**
@@ -263,6 +268,45 @@ public class FxUtils {
 		children.addAll(Arrays.asList(nodes));
 		popup.getContent().add(new StackPane(children.toArray(Node[]::new)));
 		return popup;
+	}
+	
+	@NotNull
+	public static Parent addHighlighting(Node node, Color highlightColor, Color defaultColor, double highlightPadding) {
+		return addHighlighting(node, highlightColor, defaultColor, 5.0, highlightPadding);
+	}
+	
+	@NotNull
+	public static Parent addHighlighting(Node node, Color highlightColor, Color defaultColor, double highlightRadius, double highlightPadding) {
+		return addHighlighting(node, new Background(new BackgroundFill(highlightColor, new CornerRadii(highlightRadius), null)), new Background(new BackgroundFill(defaultColor, new CornerRadii(highlightRadius), null)), highlightPadding);
+	}
+	
+	@NotNull
+	public static Parent addHighlighting(Node node, Background highlightBackground, Background defaultBackground, double highlightPadding) {
+		return addHighlighting(node, highlightBackground, defaultBackground, new Insets(highlightPadding));
+	}
+	
+	@NotNull
+	public static Parent addHighlighting(Node node, Color highlightColor, Color defaultColor, Insets highlightPadding) {
+		return addHighlighting(node, highlightColor, defaultColor, 5.0, highlightPadding);
+	}
+	
+	@NotNull
+	public static Parent addHighlighting(Node node, Color highlightColor, Color defaultColor, double highlightRadius, Insets highlightPadding) {
+		return addHighlighting(node, new Background(new BackgroundFill(highlightColor, new CornerRadii(highlightRadius), null)), new Background(new BackgroundFill(defaultColor, new CornerRadii(highlightRadius), null)), highlightPadding);
+	}
+	
+	@NotNull
+	public static Parent addHighlighting(Node node, Background highlightBackground, Background defaultBackground, Insets highlightPadding) {
+		GridPane pane = makeGrid(Pos.CENTER, highlightPadding, 0.0, 0.0);
+		pane.add(pane, 0, 0);
+		pane.hoverProperty().addListener(PropertyListeners.create((oldValue, newValue) -> {
+			if (newValue) {
+				pane.setBackground(highlightBackground);
+			} else {
+				pane.setBackground(defaultBackground);
+			}
+		}));
+		return pane;
 	}
 	
 }
