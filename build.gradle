@@ -19,9 +19,6 @@ javafx {
 dependencies {
 	// Local
 	implementation "org.controlsfx:ControlsFx:${ControlsFx}" // FX
-	implementation "net.luis:LUtils:${LUtils}" // Utility
-	// Google
-	implementation "com.google.guava:guava:${GoogleGuava}" // Utility
 	// Other
 	implementation "org.jetbrains:annotations:${JetBrainsAnnotations}" // Annotations
 }
