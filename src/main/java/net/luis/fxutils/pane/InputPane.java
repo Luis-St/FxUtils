@@ -1,11 +1,11 @@
-package net.luis.fxutils.fx;
+package net.luis.fxutils.pane;
 
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import net.luis.fxutils.FxUtils;
+import net.luis.fxutils.util.FxUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;

@@ -1,13 +1,11 @@
-package net.luis.fxutils.fx;
+package net.luis.fxutils.pane;
 
 import javafx.scene.Node;
 import javafx.scene.control.TextInputControl;
-import net.luis.fxutils.CssUtils;
-import net.luis.fxutils.EventHandlers;
+import net.luis.fxutils.helper.EventHandlers;
+import net.luis.fxutils.util.CssUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 

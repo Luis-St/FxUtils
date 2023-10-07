@@ -1,4 +1,4 @@
-package net.luis.fxutils;
+package net.luis.fxutils.util;
 
 import javafx.css.PseudoClass;
 import javafx.scene.Node;

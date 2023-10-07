@@ -1,4 +1,4 @@
-package net.luis.fxutils;
+package net.luis.fxutils.helper;
 
 import javafx.event.Event;
 import javafx.event.EventHandler;

@@ -1,11 +1,9 @@
-package net.luis.fxutils;
+package net.luis.fxutils.helper;
 
 import javafx.beans.value.ChangeListener;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.BiConsumer;
-import java.util.function.BiPredicate;
-import java.util.function.Predicate;
+import java.util.function.*;
 
 /**
  *

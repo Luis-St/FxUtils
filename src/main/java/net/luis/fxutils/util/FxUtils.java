@@ -1,4 +1,4 @@
-package net.luis.fxutils;
+package net.luis.fxutils.util;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -7,17 +7,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Popup;
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  *

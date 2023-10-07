@@ -1,4 +1,4 @@
-package net.luis.fxutils;
+package net.luis.fxutils.util;
 
 import javafx.scene.paint.Color;
 import org.jetbrains.annotations.NotNull;
@@ -13,7 +13,7 @@ public class ColorUtils {
 	
 	public static @NotNull Color createColor(String hex) {
 		hex = hex.trim();
-		if (hex.startsWith("#")) {
+		if (!hex.isEmpty() && hex.charAt(0) == '#') {
 			hex = hex.replace("#", "");
 		}
 		hex = hex.trim();
