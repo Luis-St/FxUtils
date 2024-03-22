@@ -69,7 +69,7 @@ publishing {
 		mavenJava(MavenPublication) {
 			groupId = "net.luis"
 			artifactId = "FxUtils"
-			version = "2.0.0"
+			version = "2.1.0"
 			artifact jar
 			artifact sourcesJar
 		}
