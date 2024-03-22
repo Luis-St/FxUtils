@@ -33,11 +33,6 @@ import java.util.function.Supplier;
 
 public interface FxApplication {
 	
-	static <T extends FxApplication> void launch(@NotNull Supplier<T> application, String @NotNull [] args) {
-		Objects.requireNonNull(application, "Application supplier must not be null");
-		launch(application.get(), args);
-	}
-	
 	static <T extends FxApplication> void launch(@NotNull T application, String @NotNull [] args) {
 		Objects.requireNonNull(application, "Application must not be null");
 		Objects.requireNonNull(args, "Arguments must not be null");
