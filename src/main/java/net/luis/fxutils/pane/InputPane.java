@@ -7,6 +7,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import net.luis.fxutils.util.FxUtils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
@@ -22,9 +23,9 @@ public class InputPane<T extends Node> extends GridPane {
 	private final T inputNode;
 	private double textSize = 13.0;
 	
-	public InputPane(String inputText, T inputNode) {
-		this.inputText = new Text(inputText);
-		this.inputNode = Objects.requireNonNull(inputNode);
+	public InputPane(@Nullable String inputText, @NotNull T inputNode) {
+		this.inputText = new Text(inputText == null ? "" : inputText);
+		this.inputNode = Objects.requireNonNull(inputNode, "Input node must not be null");
 		this.init();
 	}
 	

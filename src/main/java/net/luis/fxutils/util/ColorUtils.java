@@ -3,6 +3,8 @@ package net.luis.fxutils.util;
 import javafx.scene.paint.Color;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 /**
  *
  * @author Luis-st
@@ -11,7 +13,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class ColorUtils {
 	
-	public static @NotNull Color createColor(String hex) {
+	public static @NotNull Color createColor(@NotNull String hex) {
+		Objects.requireNonNull(hex, "Hex string must not be null");
 		hex = hex.trim();
 		if (!hex.isEmpty() && hex.charAt(0) == '#') {
 			hex = hex.replace("#", "");

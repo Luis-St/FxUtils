@@ -4,6 +4,8 @@ import javafx.scene.Node;
 import javafx.scene.control.TextInputControl;
 import net.luis.fxutils.helper.EventHandlers;
 import net.luis.fxutils.util.CssUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Function;
@@ -27,11 +29,11 @@ public class InputValidationPane<T extends Node> extends InputPane<T> {
 		}
 	};
 	
-	public InputValidationPane(String inputText, T inputNode) {
+	public InputValidationPane(@Nullable String inputText, @NotNull T inputNode) {
 		super(inputText, inputNode);
 	}
 	
-	public InputValidationPane(String inputText, T inputNode, Function<T, ValidationState> inputValidation) {
+	public InputValidationPane(@Nullable String inputText, @NotNull T inputNode, @NotNull Function<T, ValidationState> inputValidation) {
 		super(inputText, inputNode);
 		this.setInputValidation(inputValidation);
 	}
@@ -43,12 +45,13 @@ public class InputValidationPane<T extends Node> extends InputPane<T> {
 		this.getInputNode().setOnMouseClicked(EventHandlers.create(this.inputValidation));
 	}
 	
-	public void setInputValidation(Function<T, InputValidationPane.ValidationState> inputValidation) {
+	public void setInputValidation(@NotNull Function<T, InputValidationPane.ValidationState> inputValidation) {
+		Objects.requireNonNull(inputValidation, "Input validation must not be null");
 		this.inputValidation = () -> {
 			if (this.isValidationActive()) {
 				this.setPseudoClassValue("valid", false);
 				this.setPseudoClassValue("invalid", false);
-				ValidationState state = Objects.requireNonNull(inputValidation).apply(this.getInputNode());
+				ValidationState state = inputValidation.apply(this.getInputNode());
 				if (state == ValidationState.VALID) {
 					this.setPseudoClassValue("valid", true);
 				} else if (state == ValidationState.INVALID) {
@@ -59,7 +62,8 @@ public class InputValidationPane<T extends Node> extends InputPane<T> {
 		this.update();
 	}
 	
-	private void setPseudoClassValue(String clazz, boolean value) {
+	private void setPseudoClassValue(@NotNull String clazz, boolean value) {
+		Objects.requireNonNull(clazz, "Pseudo class must not be null");
 		CssUtils.setPseudoClassValue(this.getInputNode(), clazz, value);
 		for (Node node : this.childNodes) {
 			CssUtils.setPseudoClassValue(node, clazz, value);
@@ -71,7 +75,7 @@ public class InputValidationPane<T extends Node> extends InputPane<T> {
 	}
 	
 	public void setValidationPredicate(Predicate<T> validationPredicate) {
-		this.validationPredicate = validationPredicate;
+		this.validationPredicate = Objects.requireNonNull(validationPredicate, "Validation predicate must not be null");
 	}
 	
 	public boolean isValidationActive() {
@@ -79,7 +83,7 @@ public class InputValidationPane<T extends Node> extends InputPane<T> {
 	}
 	
 	public void overrideInputValidation(InputValidationPane.ValidationState state) {
-		Objects.requireNonNull(state);
+		Objects.requireNonNull(state, "Validation state must not be null");
 		this.setPseudoClassValue("valid", false);
 		this.setPseudoClassValue("invalid", false);
 		if (state == ValidationState.VALID) {
@@ -94,8 +98,9 @@ public class InputValidationPane<T extends Node> extends InputPane<T> {
 		this.update();
 	}
 	
-	public void removeChildNode(Node node) {
+	public void removeChildNode(@Nullable Node node) {
 		if (this.childNodes.remove(node)) {
+			Objects.requireNonNull(node, "Node must not be null");
 			CssUtils.setPseudoClassValue(node, "valid", false);
 			CssUtils.setPseudoClassValue(node, "invalid", false);
 		}
