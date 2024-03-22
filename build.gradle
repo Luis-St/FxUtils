@@ -28,8 +28,22 @@ java {
 	withSourcesJar()
 }
 
+javadoc {
+	exclude("**/Main.java")
+	options.memberLevel = JavadocMemberLevel.PRIVATE
+}
+
 artifacts {
 	archives sourcesJar
+}
+
+tasks.register("run", JavaExec) {
+	group = "runs"
+	getMainClass().set("net.luis.fxutils.Main")
+	classpath = sourceSets.main.runtimeClasspath
+	enableAssertions = true
+	args()
+	jvmArgs()
 }
 
 def username = ""
@@ -65,7 +79,12 @@ publishing {
 	}
 }
 
+sourcesJar {
+	exclude("**/Main.java")
+}
+
 jar {
+	exclude("net/luis/fxutils/Main.class")
 	manifest {
 		attributes([
 			"Built-By": "Luis Staudt",
