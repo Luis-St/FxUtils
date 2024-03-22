@@ -1,7 +1,7 @@
 # gradle
-/build/
-/.gradle/
+build
+.gradle
 
 # project files
-/.idea/
-src/main/java/net/luis/utils/Main.java
+.idea
+src/main/java/net/luis/fxutils/Main.java
