@@ -2,6 +2,7 @@ plugins {
 	id "java"
 	id "org.openjfx.javafxplugin" version "${OpenJfx}"
 	id "maven-publish"
+	id "com.github.joschi.licenser" version "${Licenser}"
 }
 
 repositories {
@@ -23,6 +24,13 @@ dependencies {
 	implementation "org.jetbrains:annotations:${JetBrainsAnnotations}" // Annotations
 }
 
+compileJava.dependsOn(updateLicenses)
+
+license {
+	header = file("header.txt")
+	include("**/*.java")
+	exclude("**/Main.java")
+}
 
 java {
 	withSourcesJar()
@@ -43,7 +51,7 @@ tasks.register("run", JavaExec) {
 	classpath = sourceSets.main.runtimeClasspath
 	enableAssertions = true
 	args()
-	jvmArgs()
+	jvmArgs("--module-path", classpath.asPath, "--add-modules", "javafx.controls")
 }
 
 def username = ""
