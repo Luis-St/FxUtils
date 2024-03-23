@@ -54,9 +54,9 @@ public interface FxApplication {
 		});
 	}
 	
-	void init(String @NotNull [] args) throws Exception;
+	default void init(String @NotNull [] args) throws Exception {}
 	
 	void start(@NotNull Stage primaryStage) throws Exception;
 	
-	void stop() throws Exception;
+	default void stop() throws Exception {}
 }
