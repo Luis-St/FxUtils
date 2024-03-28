@@ -1,60 +1,78 @@
 name: Publish to maven on merged pull request
 
 on:
-  pull_request:
-    types:
-      - closed
-    branches:
-      - 'main'
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 
 permissions:
   contents: read
 
 jobs:
-  build:
-    if: github.event.pull_request.merged == true
+  license-check:
     runs-on: ubuntu-latest
     steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v4.1.1
       - name: 'Set up Oracle JDK 21'
         uses: oracle-actions/setup-java@v1
         with:
           website: oracle.com
           release: 21
-      - name: 'Set up Gradle'
-        uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5
-      - name: 'Grant Permission for Gradle'
+      - name: 'Grant Permission to Gradle'
+        run: chmod +x gradlew
+      - name: 'License check with Gradle'
+        uses: gradle/actions/setup-gradle@v3.1.0
+        with:
+          arguments: licenseCheck
+  build:
+    needs: license-check
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v4.1.1
+      - name: 'Set up Oracle JDK 21'
+        uses: oracle-actions/setup-java@v1
+        with:
+          website: oracle.com
+          release: 21
+      - name: 'Grant Permission to Gradle'
         run: chmod +x gradlew
       - name: 'Build with Gradle'
-        run: ./gradlew build
+        uses: gradle/actions/setup-gradle@v3.1.0
+        with:
+          arguments: build
   test:
-    if: github.event.pull_request.merged == true
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v4.1.1
       - name: 'Set up Oracle JDK 21'
         uses: oracle-actions/setup-java@v1
         with:
           website: oracle.com
           release: 21
-      - name: 'Set up Gradle'
-        uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5
-      - name: 'Grant Permission for Gradle'
+      - name: 'Grant Permission to Gradle'
         run: chmod +x gradlew
       - name: 'Test with Gradle'
-        run: ./gradlew test
+        uses: gradle/actions/setup-gradle@v3.1.0
+        with:
+          arguments: test
   publish:
-    if: github.event.pull_request.merged == true
     needs: test
     runs-on: ubuntu-latest
     steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v4.1.1
       - name: 'Set up Oracle JDK 21'
         uses: oracle-actions/setup-java@v1
         with:
           website: oracle.com
           release: 21
-      - name: 'Set up Gradle'
-        uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5
-      - name: 'Grant Permission for Gradle'
+      - name: 'Grant Permission to Gradle'
         run: chmod +x gradlew
       - name: 'Publish with Gradle'
-        run: ./gradlew publish
+        uses: gradle/actions/setup-gradle@v3.1.0
+        with:
+          arguments: publish
