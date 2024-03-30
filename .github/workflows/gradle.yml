@@ -1,4 +1,4 @@
-name: Runs the project tests on commit
+name: Runs the project tests
 
 on:
   push:
