@@ -26,11 +26,22 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 /**
+ * Represents a custom JavaFX application.<br>
+ * <p>
+ *     The custom application instance must be created and passed to the {@link #launch(FxApplication, String[])} method.<br>
+ *     The application must implement the {@link #start(Stage)} method to define the application's main stage.<br>
+ * </p>
+ * <p>
+ *     Application lifecycle is as follows:<br>
+ * </p>
+ * <ul>
+ *     <li>{@link #init(String[])}: Called before the application is started.</li>
+ *     <li>{@link #start(Stage)}: Called when the application is started.</li>
+ *     <li>{@link #stop()}: Called when the application is closed.</li>
+ * </ul>
  *
  * @author Luis-St
- *
  */
-
 public interface FxApplication {
 	
 	static <T extends FxApplication> void launch(@NotNull T application, String @NotNull [] args) {
@@ -44,12 +55,12 @@ public interface FxApplication {
 					try {
 						application.stop();
 					} catch (Exception e) {
-						throw new RuntimeException("Failed to stop application", e);
+						throw new RuntimeException("Error in application lifecycle", e);
 					}
 				});
 				application.start(primaryStage);
 			} catch (Exception e) {
-				throw new RuntimeException("Failed to start application", e);
+				throw new RuntimeException("Error in application lifecycle", e);
 			}
 		});
 	}

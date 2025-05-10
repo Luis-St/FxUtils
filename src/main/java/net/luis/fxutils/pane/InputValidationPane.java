@@ -48,11 +48,11 @@ public class InputValidationPane<T extends Node> extends InputPane<T> {
 	};
 	
 	public InputValidationPane(@Nullable String inputText, @NotNull T inputNode) {
-		super(inputText, inputNode);
+		super(inputText, 13.0, inputNode);
 	}
 	
 	public InputValidationPane(@Nullable String inputText, @NotNull T inputNode, @NotNull Function<T, ValidationState> inputValidation) {
-		super(inputText, inputNode);
+		super(inputText, 13.0, inputNode);
 		this.setInputValidation(inputValidation);
 	}
 	

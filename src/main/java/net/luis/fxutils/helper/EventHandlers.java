@@ -25,13 +25,20 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 
 /**
+ * Utility class for creating event handlers.<br>
  *
  * @author Luis-st
- *
  */
-
 public class EventHandlers {
 	
+	/**
+	 * Creates an event handler that runs the given action when the event is fired.<br>
+	 * The event object of the event handler is ignored.<br>
+	 * @param eventAction The action to run when the event is fired
+	 * @return The created event handler
+	 * @param <T> The type of the event
+	 * @throws NullPointerException If the event action is null
+	 */
 	public static <T extends Event> @NotNull EventHandler<T> create(@NotNull Runnable eventAction) {
 		Objects.requireNonNull(eventAction, "Event action must not be null");
 		return event -> eventAction.run();

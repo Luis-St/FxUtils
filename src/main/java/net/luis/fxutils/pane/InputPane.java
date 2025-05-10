@@ -38,11 +38,12 @@ import java.util.Objects;
 public class InputPane<T extends Node> extends GridPane {
 	
 	private final Text inputText;
+	private final double textSize;
 	private final T inputNode;
-	private double textSize = 13.0;
 	
-	public InputPane(@Nullable String inputText, @NotNull T inputNode) {
+	public InputPane(@Nullable String inputText, double textSize, @NotNull T inputNode) {
 		this.inputText = new Text(inputText == null ? "" : inputText);
+		this.textSize = Math.max(1.0, textSize);
 		this.inputNode = Objects.requireNonNull(inputNode, "Input node must not be null");
 		this.init();
 	}
@@ -61,15 +62,6 @@ public class InputPane<T extends Node> extends GridPane {
 	
 	public @NotNull Text getInputText() {
 		return this.inputText;
-	}
-	
-	public double getTextSize() {
-		return this.textSize;
-	}
-	
-	public void setTextSize(double textSize) {
-		this.textSize = textSize;
-		this.update();
 	}
 	
 	public @NotNull T getInputNode() {
